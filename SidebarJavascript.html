@@ -1,0 +1,58 @@
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script>
+  /**
+   * Run initializations on sidebar load.
+   */
+  $(function() {
+    $('#lastReloadTime').text(Date());
+    $('#sidebar-create-button').click(onClick.bind(this, 'onCreateClick'));
+    $('#sidebar-delete-button').click(onClick.bind(this, 'onDeleteClick'));
+    $('#sidebar-test-create-button').click(onClick.bind(this, 'onTestCreateClick'));
+    $('#sidebar-test-delete-button').click(onClick.bind(this, 'onTestDeleteClick'));
+  });
+
+  function onClick(options) {
+    showStatus('starting script...');
+    var optionsDictionary = {
+      'onCreateClick': {onlyDelete: false, onlyTest: false},
+      'onDeleteClick': {onlyDelete: true, onlyTest: false},
+      'onTestCreateClick': {onlyDelete: false, onlyTest: true},
+      'onTestDeleteClick': {onlyDelete: true, onlyTest: true}
+    }
+    console.log(options + ' ' + JSON.stringify(optionsDictionary[options]));
+
+    this.disabled = true;
+
+    // Send the value to the server and handle the response.
+    google.script.run
+        .withSuccessHandler(
+          function(msg, element) {
+            // Respond to success conditions here.
+            showStatus(options + '\n ' + Date());
+            element.disabled = false;
+          })
+        .withFailureHandler(
+          function(msg, element) {
+            // Respond to failure conditions here.
+            showStatus(msg, 'error');
+            element.disabled = false;
+          })
+        .withUserObject(this)
+        .updateCalendar(optionsDictionary[options]);
+  }
+
+  /**
+   * Displays the given status message in the sidebar.
+   *
+   * @param {String} msg The status message to display.
+   * @param {String} classId The message type (class id) that the message
+   *   should be displayed as.
+   */
+  function showStatus(msg, classId) {
+    $('#sidebar-status').removeClass().html(msg);
+    if (classId) {
+      $('#sidebar-status').addClass(classId);
+    }
+  }
+
+</script>

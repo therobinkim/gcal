@@ -1,0 +1,32 @@
+<!-- Use a templated HTML printing scriptlet to import common stylesheet. -->
+<?!= HtmlService.createHtmlOutputFromFile('Stylesheet').getContent(); ?>
+
+<!-- Below is the HTML code that defines the sidebar element structure. -->
+<div class="sidebar branding-below">
+  <p>
+    Last reloaded at: <span id="lastReloadTime"></span>
+  </p>
+  <p>
+    Select entire rows and click the button to add events to the calendar.
+  </p>
+  <div class="block" id="sidebar-button-bar">
+    <button id="sidebar-create-button">Create Events</button>
+    <button id="sidebar-delete-button">Delete Events</button>
+    <br /><br />
+    TESTING (only affects staff calendar and does not invite people)<br />
+    <button id="sidebar-test-create-button">Test Create Events</button>
+    <button id="sidebar-test-delete-button">Test Delete Events</button>
+  </div>
+  <div id="sidebar-status"></div>
+</div>
+
+<!-- Enter sidebar bottom-branding below. -->
+<div class="sidebar bottom">
+  <img alt="Add-on logo" class="logo" width="25"
+      src="https://avatars0.githubusercontent.com/u/4218375?v=3&s=200">
+  <span class="gray branding-text">Spreadsheet Add-on by MakerSquare<br />
+  Contributors: Brian Atwood and Robin Kim</span>
+</div>
+
+<!-- Use a templated HTML printing scriptlet to import JavaScript. -->
+<?!= HtmlService.createHtmlOutputFromFile('SidebarJavaScript').getContent(); ?>
