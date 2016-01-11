@@ -96,7 +96,7 @@ function updateCalendar(options) {
         if (options.onlyTest === false) {
           studentCal && studentCal.createEvent(event[CAL.title], new Date(event[CAL.startTime]), new Date(event[CAL.endTime]), { description: event[CAL.description], location: event[CAL.location] } );
         }
-        staffCal && staffCal.createEvent(event[CAL.prependToTitle] + event[CAL.title] + event[CAL.appendToTitle], new Date(event[CAL.startTime]), new Date(event[CAL.endTime]), { description: event[CAL.description], location: event[CAL.location], guests: options.onlyTest ? '' : event[CAL.guests] });
+        staffCal && staffCal.createEvent(event[CAL.title], new Date(event[CAL.startTime]), new Date(event[CAL.endTime]), { description: event[CAL.description], location: event[CAL.location], guests: options.onlyTest ? '' : event[CAL.guests] });
       }
       catch (e) {
         Logger.log('ERROR');
