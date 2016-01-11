@@ -66,8 +66,8 @@ var CAL_OLD = {
 };
 
 var CAL_NEW = {
-  location: alphaToNumber('B'),
-  title: alphaToNumber('C'),
+  title: alphaToNumber('B'),
+  location: alphaToNumber('C'),
   description: alphaToNumber('D'),
   startTime: alphaToNumber('G'),
   endTime: alphaToNumber('I'),
