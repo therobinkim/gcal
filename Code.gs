@@ -36,7 +36,7 @@ function showSidebar() {
       .setTitle(SIDEBAR_TITLE);
   SpreadsheetApp.getUi().showSidebar(ui);
 }
-// SpreadsheetApp.getActiveSpreadsheet().getRange(4, CAL.eventID1 + 1, numRows, 2);
+
 function getEventsFromSheet(){
   return SpreadsheetApp.getActiveSpreadsheet().getActiveRange().getValues();
 }
@@ -115,23 +115,4 @@ function clearEventsInRange(events, calendars){
       event.deleteEvent();
     });
   });
-}
-
-/**
- * Executes the specified action (create a new sheet, copy the active sheet, or
- * clear the current sheet).
- *
- * @param {String} action An identifier for the action to take.
- */
-function modifySheets(action) {
-  // Use data collected from dialog to manipulate the spreadsheet.
-  var ss = SpreadsheetApp.getActiveSpreadsheet();
-  var currentSheet = ss.getActiveSheet();
-  if (action == "create") {
-    ss.insertSheet();
-  } else if (action == "copy") {
-    currentSheet.copyTo(ss);
-  } else if (action == "clear") {
-    currentSheet.clear();
-  }
 }
