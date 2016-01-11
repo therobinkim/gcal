@@ -5,19 +5,28 @@
    */
   $(function() {
     $('#lastReloadTime').text(Date());
-    $('#sidebar-create-button').click(onClick.bind(this, 'onCreateClick'));
-    $('#sidebar-delete-button').click(onClick.bind(this, 'onDeleteClick'));
-    $('#sidebar-test-create-button').click(onClick.bind(this, 'onTestCreateClick'));
-    $('#sidebar-test-delete-button').click(onClick.bind(this, 'onTestDeleteClick'));
+    $('#student-publish-old').click(onClick.bind(this, 'onStudentPublishOldClick'));
+    $('#student-delete-old').click(onClick.bind(this, 'onStudentDeleteOldClick'));
+    $('#staff-publish-old').click(onClick.bind(this, 'onStaffPublishOldClick'));
+    $('#staff-delete-old').click(onClick.bind(this, 'onStaffDeleteOldClick'));
+
+    $('#student-publish-new').click(onClick.bind(this, 'onStudentPublishNewClick'));
+    $('#student-delete-new').click(onClick.bind(this, 'onStudentDeleteNewClick'));
+    $('#staff-publish-new').click(onClick.bind(this, 'onStaffPublishNewClick'));
+    $('#staff-delete-new').click(onClick.bind(this, 'onStaffDeleteNewClick'));
   });
 
   function onClick(options) {
     showStatus('starting script...');
     var optionsDictionary = {
-      'onCreateClick': {onlyDelete: false, onlyTest: false},
-      'onDeleteClick': {onlyDelete: true, onlyTest: false},
-      'onTestCreateClick': {onlyDelete: false, onlyTest: true},
-      'onTestDeleteClick': {onlyDelete: true, onlyTest: true}
+      'onStudentPublishOldClick': {onlyDelete: false, onlyTest: false, old: true},
+      'onStudentDeleteOldClick' : {onlyDelete: true,  onlyTest: false, old: true},
+      'onStaffPublishOldClick'  : {onlyDelete: false, onlyTest: true,  old: true},
+      'onStaffDeleteOldClick'   : {onlyDelete: true,  onlyTest: true,  old: true},
+      'onStudentPublishNewClick': {onlyDelete: false, onlyTest: false, old: false},
+      'onStudentDeleteNewClick' : {onlyDelete: true,  onlyTest: false, old: false},
+      'onStaffPublishNewClick'  : {onlyDelete: false, onlyTest: true,  old: false},
+      'onStaffDeleteNewClick'   : {onlyDelete: true,  onlyTest: true,  old: false}
     }
     console.log(options + ' ' + JSON.stringify(optionsDictionary[options]));
 

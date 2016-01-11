@@ -50,8 +50,8 @@ function getCalendar(rangeName){
 }
 
 // CALENDAR_PARAMETER_INDICES
-var CAL = {
-  studentFacing: alphaToNumber('A'),
+var CAL_OLD = {
+//  studentFacing: alphaToNumber('A'),
   allDay: alphaToNumber('C'),
   startTime: alphaToNumber('E'),
   endTime: alphaToNumber('H'),
@@ -65,6 +65,15 @@ var CAL = {
   eventID2: alphaToNumber('P'),
 };
 
+var CAL_NEW = {
+  location: alphaToNumber('B'),
+  title: alphaToNumber('C'),
+  description: alphaToNumber('D'),
+  startTime: alphaToNumber('G'),
+  endTime: alphaToNumber('I'),
+  guests: alphaToNumber('J')
+};
+
 function alphaToNumber(letter) {
   return letter.charCodeAt(0) - "A".charCodeAt(0);
 }
@@ -74,13 +83,19 @@ function updateCalendar(options) {
   var staffCal = getCalendar("StaffCalendarID");
   var studentCal = getCalendar("StudentCalendarID");
   var calendars = [];
+
   staffCal && calendars.push(staffCal);
   if(options.onlyTest === false) {
     studentCal && calendars.push(studentCal);
   }
+  if(options.old === true) {
+    var CAL = CAL_OLD;
+  } else {
+    var CAL = CAL_NEW;
+  }
   var events = getEventsFromSheet();
 
-  clearEventsInRange(events, calendars);
+  clearEventsInRange(events, calendars, CAL);
 
   if(options.onlyDelete === false) {
     events.forEach(function(event){
@@ -106,7 +121,7 @@ function updateCalendar(options) {
   }
 }
 
-function clearEventsInRange(events, calendars){
+function clearEventsInRange(events, calendars, CAL){
   var firstEventStartTime = new Date(events[0][CAL.startTime]);
   var lastEventStartTime = new Date(events[events.length - 1][CAL.endTime]);
 
