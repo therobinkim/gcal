@@ -122,6 +122,12 @@ function updateCalendar(options) {
 }
 
 function clearEventsInRange(events, calendars, CAL){
+  if(events[0][CAL.title] === "" || events[events.length - 1][CAL.title] === "") {
+    throw "AHHH ERRORRRR! either the first row or last row has no title";
+  }
+  if(events[0][CAL.startTime] === "" || events[events.length - 1][CAL.endTime] === "") {
+    throw "AHHH ERRORRRR! either the first row or last row is blank";
+  }
   var firstEventStartTime = new Date(events[0][CAL.startTime]);
   var lastEventStartTime = new Date(events[events.length - 1][CAL.endTime]);
 
