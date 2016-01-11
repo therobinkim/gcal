@@ -93,8 +93,8 @@ function updateCalendar(options) {
         if (event[CAL.appendToTitle]) {
           event[CAL.appendToTitle] = " (" + event[CAL.appendToTitle] + ")";
         }
-        if (options.onlyTest === false && event[CAL.studentFacing] === "yes") {
-          studentCal && studentCal.createEvent(event[CAL.title], new Date(event[CAL.startTime]), new Date(event[CAL.endTime]));
+        if (options.onlyTest === false) {
+          studentCal && studentCal.createEvent(event[CAL.title], new Date(event[CAL.startTime]), new Date(event[CAL.endTime]), { description: event[CAL.description], location: event[CAL.location] } );
         }
         staffCal && staffCal.createEvent(event[CAL.prependToTitle] + event[CAL.title] + event[CAL.appendToTitle], new Date(event[CAL.startTime]), new Date(event[CAL.endTime]), { description: event[CAL.description], location: event[CAL.location], guests: options.onlyTest ? '' : event[CAL.guests] });
       }
